@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ssh</groupId>
+    <artifactId>Standardssh</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>Standard Ssh Project</name>
+    <url>http://maven.apache.org</url>
+
+
+    <properties>
+        <spring.version>4.3.10.RELEASE</spring.version>
+        <jdk.version>1.8</jdk.version>
+        <junit.version>4.11</junit.version>
+        <jstl.version>1.2</jstl.version>
+        <jpa.version>1.11.6.RELEASE</jpa.version>
+        <mysql.version>5.1.38</mysql.version>
+        <datapool.version>0.9.5.2</datapool.version>
+        <jackson.version>2.9.0</jackson.version>
+        <log4j.version>1.2.17</log4j.version>
+        <hibernate.version>5.2.10.Final</hibernate.version>
+        <tomcat.maven.plugin.version>2.2</tomcat.maven.plugin.version>
+        <!-- 项目路径 -->
+        <project.path>/ssh</project.path>
+    </properties>
+
+
+    <dependencies>
+
+        <!--  Junit  -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--  Spring  -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+            <!--  排除不需要同时下载的包  -->
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- Spring Aop -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- 持久层 Spring Jpa -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${jpa.version}</version>
+        </dependency>
+
+        <!-- 持久层 Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <!-- 持久层 Mybatis -->
+
+
+        <!-- mysql 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <!-- c3p0 连接池 -->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>${datapool.version}</version>
+        </dependency>
+        <!-- Spring 事务 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Spring Test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Spring Web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- log4j 日志 -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <!-- Jstl JSP标准标签库 -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <!--最终生成的war文件名-->
+        <finalName>${project.name}</finalName>
+        <!--打包的资源-->
+        <resources>
+            <resource>
+                <directory>java/src</directory>
+            </resource>
+            <resource>
+                <directory>java/res</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>java/res/profiles/${profile.env}</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <!-- JDK -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <version>${tomcat.maven.plugin.version}</version>
+                <configuration>
+                    <url>${deploy.url}</url>
+                    <server>TomcatServer</server>
+                    <path>${project.path}</path>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- 环境变量 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <!-- 默认打包 -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.env>dev</profile.env>
+                <!-- 部署url-->
+                <deploy.url>http://127.0.0.1:8080/manager/text</deploy.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <activation />
+            <properties>
+                <profile.env>uat</profile.env>
+            </properties>
+        </profile>
+        <profile>
+            <id>staging</id>
+            <activation />
+            <properties>
+                <profile.env>staging</profile.env>
+            </properties>
+        </profile>
+        <profile>
+            <id>product</id>
+            <activation />
+            <properties>
+                <profile.env>product</profile.env>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
