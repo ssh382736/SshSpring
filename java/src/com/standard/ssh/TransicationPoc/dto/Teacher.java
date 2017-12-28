@@ -1,16 +1,28 @@
 package com.standard.ssh.TransicationPoc.dto;
 
 
-import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Table(name = "master.teacher")
+@Entity
+@Table(name = "teacher")
 public class Teacher {
-
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private int number;
     @Column(name = "id")
     private String id;
     @Column(name = "name")
     private String name;
+
+    public Teacher(String id,String name){}
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public int getNumber() {
+        return number;
+    }
 
     public void setId(String id) {
         this.id = id;
